@@ -1,9 +1,12 @@
 package whychuck;
 
 public class Cell {
-	private int x;
-	private int y;
+	private int coordinate;
 	private Figure figure;
+	
+	public Cell(int x) {
+		setCoordinate(x);
+	}
 	
 	public boolean isEmpty() {
 		if(figure == null) {
@@ -18,16 +21,10 @@ public class Cell {
 	public void setFigure(Figure figure) {
 		this.figure = figure;
 	}
-	private int getX() {
-		return x;
+	int getCoordinate() {
+		return coordinate;
 	}
-	private void setX(int x) {
-		this.x = x;
-	}
-	private int getY() {
-		return y;
-	}
-	private void setY(int y) {
-		this.y = y;
+	private void setCoordinate(int coordinate) {
+		this.coordinate = coordinate;
 	}
 }

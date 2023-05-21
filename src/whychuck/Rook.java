@@ -1,5 +1,7 @@
 package whychuck;
 
-class Rook extends Figure {
-
+public class Rook extends Figure {
+	public Rook(boolean isMine) {
+		super(isMine);
+	}
 }
