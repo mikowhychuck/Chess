@@ -27,4 +27,5 @@ public class Cell {
 	private void setCoordinate(int coordinate) {
 		this.coordinate = coordinate;
 	}
+	
 }

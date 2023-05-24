@@ -5,6 +5,9 @@ public class Pawn extends Figure {
     public Pawn(boolean isMine) {
 		super(isMine);
 	}
+    public String getSymbol() {
+		return "♙";
+	}
 
 	public boolean move(Board board, int currentIndex, int targetIndex) {
     	Cell currentCell = board.getCell(currentIndex);

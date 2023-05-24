@@ -1,11 +1,12 @@
 package whychuck;
 
 class Board {
-	private Cell[] cells;
+	public Cell[] cells;
 	
 	public Board() {
         cells = new Cell[64];
         initializeCells();
+        initializeDefaultFigures();
     }
 	
 	private void initializeCells() {
@@ -50,5 +51,22 @@ class Board {
             cells[i].setFigure(new Pawn(false));
         }
     }
+    
+    public void print() {
+    	for (int row = 7; row >= 0; row--) {
+            for (int col = 0; col < 8; col++) {
+                Cell cell = cells[row * 8 + col];
+                Figure figure = cell.getFigure();
+                if (figure == null) {
+                    System.out.print("□ ");
+                } else {
+                    // Wyświetl odpowiedni symbol figury
+                    System.out.print(figure.getSymbol() + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
 }
 
