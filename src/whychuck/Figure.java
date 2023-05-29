@@ -14,7 +14,6 @@ public abstract class Figure {
         return isMine;
     }
 
-    //public abstract String toString();
     public abstract boolean move(Board board, int currentIndex, int targetIndex);
     public abstract String getSymbol();
 

@@ -4,8 +4,8 @@ public class Cell {
 	private int coordinate;
 	private Figure figure;
 	
-	public Cell(int x) {
-		setCoordinate(x);
+	public Cell(int coordinate) {
+		setCoordinate(coordinate);
 	}
 	
 	public boolean isEmpty() {

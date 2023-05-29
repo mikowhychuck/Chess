@@ -2,8 +2,8 @@ package whychuck;
 
 public class Pawn extends Figure {
 	
-    public Pawn(boolean isMine) {
-		super(isMine);
+    public Pawn(boolean isWhite) {
+		super(isWhite);
 	}
     public String getSymbol() {
 		return "♙";
