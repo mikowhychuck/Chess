@@ -26,29 +26,29 @@ class Board {
     private void initializeDefaultFigures() {
         // Ustaw domyślne figury dla początkowego ustawienia
         // moje figury
-        getCells()[0].setFigure(new Rook(true)); 
-        getCells()[1].setFigure(new Knight(true)); 
-        getCells()[2].setFigure(new Bishop(true));
-        getCells()[3].setFigure(new Queen(true));
-        getCells()[4].setFigure(new King(true));
-        getCells()[5].setFigure(new Bishop(true));
-        getCells()[6].setFigure(new Knight(true));
-        getCells()[7].setFigure(new Rook(true));
+        getCells()[0].setFigure(new Rook(true, true)); 
+        getCells()[1].setFigure(new Knight(true, true)); 
+        getCells()[2].setFigure(new Bishop(true, true));
+        getCells()[3].setFigure(new Queen(true, true));
+        getCells()[4].setFigure(new King(true, true));
+        getCells()[5].setFigure(new Bishop(true, true));
+        getCells()[6].setFigure(new Knight(true, true));
+        getCells()[7].setFigure(new Rook(true, true));
         for (int i = 8; i < 16; i++) {
-            getCells()[i].setFigure(new Pawn(true));
+            getCells()[i].setFigure(new Pawn(true, true));
         }
 
         // figury opponenta
-        getCells()[56].setFigure(new Rook(false)); 
-        getCells()[57].setFigure(new Knight(false)); 
-        getCells()[58].setFigure(new Bishop(false));  
-        getCells()[59].setFigure(new Queen(false));
-        getCells()[60].setFigure(new King(false));
-        getCells()[61].setFigure(new Bishop(false));
-        getCells()[62].setFigure(new Knight(false));
-        getCells()[63].setFigure(new Rook(false));
+        getCells()[56].setFigure(new Rook(false, false)); 
+        getCells()[57].setFigure(new Knight(false, false)); 
+        getCells()[58].setFigure(new Bishop(false, false));  
+        getCells()[59].setFigure(new Queen(false, false));
+        getCells()[60].setFigure(new King(false, false));
+        getCells()[61].setFigure(new Bishop(false, false));
+        getCells()[62].setFigure(new Knight(false, false));
+        getCells()[63].setFigure(new Rook(false, false));
         for (int i = 48; i < 56; i++) {
-            getCells()[i].setFigure(new Pawn(false));
+            getCells()[i].setFigure(new Pawn(false, false));
         }
     }
     

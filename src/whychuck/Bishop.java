@@ -1,11 +1,14 @@
 package whychuck;
 
 public class Bishop extends Figure {
-	public Bishop(boolean isMine) {
-		super(isMine);
+	public Bishop(boolean isMine, boolean isWhite) {
+		super(isMine, isWhite);
 	}
 	public String getSymbol() {
-		return "♗";
+		if(isWhite())
+			return "\u2657";
+		else
+			return "\u265D";
 	}
 	public boolean move(Board board, int currentIndex, int targetIndex) {
         int currentRow = currentIndex / 8;

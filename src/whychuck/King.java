@@ -1,12 +1,16 @@
 package whychuck;
 
 class King extends Figure {
-	public King(boolean isMine) {
-		super(isMine);
+	public King(boolean isMine, boolean isWhite) {
+		super(isMine, isWhite);
 	}
 	
 	public String getSymbol() {
-		return "♔";
+		if(isWhite())
+			return "\u2654";
+		else 
+			return "\u265A";
+		
 	}
 	
     public boolean move(Board board, int currentIndex, int targetIndex) {

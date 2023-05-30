@@ -1,11 +1,14 @@
 package whychuck;
 
 public class Rook extends Figure {
-	public Rook(boolean isMine) {
-		super(isMine);
+	public Rook(boolean isMine, boolean isWhite) {
+		super(isMine, isWhite);
 	}
 	public String getSymbol() {
-		return "♖";
+		if(isWhite())
+			return "\u2656";
+		else
+			return "\u265C";
 	}
 	
 	public boolean move(Board board, int currentIndex, int targetIndex) {

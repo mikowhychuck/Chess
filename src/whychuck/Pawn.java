@@ -2,11 +2,14 @@ package whychuck;
 
 public class Pawn extends Figure {
 	
-    public Pawn(boolean isWhite) {
-		super(isWhite);
+    public Pawn(boolean isMine, boolean isWhite) {
+		super(isMine, isWhite);
 	}
     public String getSymbol() {
-		return "♙";
+		if(isWhite())
+			return "\u2659";
+		else
+			return "\u265F";
 	}
 
 	public boolean move(Board board, int currentIndex, int targetIndex) {

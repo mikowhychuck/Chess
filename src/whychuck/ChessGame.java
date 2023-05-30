@@ -30,7 +30,7 @@ public class ChessGame implements ChessInterface {
         if (moveSuccessful) {
             return formatMove(selectedCell.getCoordinate(), targetIndex);
         } else {
-            // Jeśli ruch nie powiódł się, wykonaj kolejny losowy ruch
+
             return nextMove(opponentMove);
         }
     }

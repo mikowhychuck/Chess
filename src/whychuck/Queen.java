@@ -1,11 +1,14 @@
 package whychuck;
 
 public class Queen extends Figure {
-	public Queen(boolean isMine) {
-		super(isMine);
+	public Queen(boolean isMine, boolean isWhite) {
+		super(isMine, isWhite);
 	}
 	public String getSymbol() {
-		return "♕";
+		if(isWhite())
+			return "\u2655";
+		else
+			return "\u265B";
 	}
 	
     public boolean move(Board board, int currentIndex, int targetIndex) {
