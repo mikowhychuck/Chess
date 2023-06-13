@@ -33,5 +33,6 @@ public abstract class Figure {
 	}
     public abstract boolean move(Board board, int currentIndex, int targetIndex);
     public abstract String getSymbol();
+    public abstract boolean isMoveValid(Board board, int currentIndex, int targetIndex);
 
 }

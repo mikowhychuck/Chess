@@ -12,6 +12,9 @@ class King extends Figure {
 			return "\u265A";
 		
 	}
+	public boolean isMoveValid(Board board, int currentIndex, int targetIndex) {
+		return true;
+	}
 	
     public boolean move(Board board, int currentIndex, int targetIndex) {
         int currentRow = currentIndex / 8;
