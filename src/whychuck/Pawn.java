@@ -18,23 +18,30 @@ public class Pawn extends Figure {
 			return "\u265F";
 	}
     public boolean isMoveValid(Board board, int currentIndex, int targetIndex) {
-    	
-    }
-	public boolean move(Board board, int currentIndex, int targetIndex) {
-    	Cell currentCell = board.getCell(currentIndex);
-        Cell targetCell = board.getCell(targetIndex);
 
-        if (targetIndex == currentIndex + 8*direction) {
-            targetCell.setFigure(this);
-            currentCell.setFigure(null);
+        Cell targetCell = board.getCell(targetIndex);
+    	if (targetIndex == currentIndex + 8*direction && targetCell.getFigure() == null) {
             return true;
-            
-        } else if (targetIndex == currentIndex + 16*direction && currentIndex < 16) {
-            targetCell.setFigure(this);
-            currentCell.setFigure(null);
+    	}else if(targetIndex == currentIndex + 16*direction && !wasMoved() && targetCell.getFigure() == null) {	
+    		return true;
+    	}else if(targetIndex == currentIndex + 7*direction &&  targetIndex == currentIndex + 9*direction) {
+    		if(targetCell.getFigure().isMine() == false) {
+    			return true;
+    		}
+    		if (targetCell.getFigure() != null && targetCell.getFigure() instanceof King) {
+            	return false;
+            }
+    	}
+    	return false;
+    }
+    	
+	public boolean move(Board board, int currentIndex, int targetIndex) {
+        if(isMoveValid(board, currentIndex, targetIndex)) {
+        	board.setFigure(currentIndex, null);
+            board.setFigure(targetIndex, this);
+            this.setMoved();
             return true;
-            
-        }   
-        return false;
+        }else
+        	return false;
     }
 }

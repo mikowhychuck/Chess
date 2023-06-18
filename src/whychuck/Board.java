@@ -3,10 +3,10 @@ package whychuck;
 class Board {
 	private Cell[] cells;
 	
-	public Board() {
+	public Board(boolean amIwhite) {
         setCells(new Cell[64]);
         initializeCells();
-        initializeDefaultFigures();
+        initializeDefaultFigures(amIwhite);
     }
 	
 	private void initializeCells() {
@@ -23,32 +23,32 @@ class Board {
         getCells()[index].setFigure(figure);
     }
 	
-    private void initializeDefaultFigures() {
+    private void initializeDefaultFigures(boolean amIwhite) {
         // Ustaw domyślne figury dla początkowego ustawienia
-        // moje figury
-        getCells()[0].setFigure(new Rook(true, true)); 
-        getCells()[1].setFigure(new Knight(true, true)); 
-        getCells()[2].setFigure(new Bishop(true, true));
-        getCells()[3].setFigure(new Queen(true, true));
-        getCells()[4].setFigure(new King(true, true));
-        getCells()[5].setFigure(new Bishop(true, true));
-        getCells()[6].setFigure(new Knight(true, true));
-        getCells()[7].setFigure(new Rook(true, true));
+        // biale figury
+        getCells()[0].setFigure(new Rook(amIwhite, true)); 
+        getCells()[1].setFigure(new Knight(amIwhite, true)); 
+        getCells()[2].setFigure(new Bishop(amIwhite, true));
+        getCells()[3].setFigure(new Queen(amIwhite, true));
+        getCells()[4].setFigure(new King(amIwhite, true));
+        getCells()[5].setFigure(new Bishop(amIwhite, true));
+        getCells()[6].setFigure(new Knight(amIwhite, true));
+        getCells()[7].setFigure(new Rook(amIwhite, true));
         for (int i = 8; i < 16; i++) {
-            getCells()[i].setFigure(new Pawn(true, true));
+            getCells()[i].setFigure(new Pawn(amIwhite, true));
         }
 
-        // figury opponenta
-        getCells()[56].setFigure(new Rook(false, false)); 
-        getCells()[57].setFigure(new Knight(false, false)); 
-        getCells()[58].setFigure(new Bishop(false, false));  
-        getCells()[59].setFigure(new Queen(false, false));
-        getCells()[60].setFigure(new King(false, false));
-        getCells()[61].setFigure(new Bishop(false, false));
-        getCells()[62].setFigure(new Knight(false, false));
-        getCells()[63].setFigure(new Rook(false, false));
+        // czarne figury
+        getCells()[56].setFigure(new Rook(!amIwhite, false)); 
+        getCells()[57].setFigure(new Knight(!amIwhite, false)); 
+        getCells()[58].setFigure(new Bishop(!amIwhite, false));  
+        getCells()[59].setFigure(new Queen(!amIwhite, false));
+        getCells()[60].setFigure(new King(!amIwhite, false));
+        getCells()[61].setFigure(new Bishop(!amIwhite, false));
+        getCells()[62].setFigure(new Knight(!amIwhite, false));
+        getCells()[63].setFigure(new Rook(!amIwhite, false));
         for (int i = 48; i < 56; i++) {
-            getCells()[i].setFigure(new Pawn(false, false));
+            getCells()[i].setFigure(new Pawn(!amIwhite, false));
         }
     }
     
@@ -75,6 +75,14 @@ class Board {
 	public void setCells(Cell[] cells) {
 		this.cells = cells;
 	}
-
+	
+	//jesli ruch nie jest mój, to nie sprawdzam czy jest prawidłowy
+	public void move(int currentIndex, int targetIndex) {
+		if(this.getCell(currentIndex).getFigure() != null) {
+			Figure figure = this.getCell(currentIndex).getFigure();
+		    setFigure(currentIndex, null);
+		    setFigure(targetIndex, figure);
+		}
+	}
 }
 
