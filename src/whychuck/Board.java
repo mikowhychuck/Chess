@@ -1,5 +1,8 @@
 package whychuck;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Board {
 	private Cell[] cells;
 	
@@ -84,5 +87,68 @@ class Board {
 		    setFigure(targetIndex, figure);
 		}
 	}
+	
+    //Sprawdzanie szacha:
+    public boolean amIChecked() {
+    	List<Cell> Cells = getOpponentCells();
+    	for (Cell cell : Cells) {
+    		if(cell.getFigure().isMoveValid(this, cell.getCoordinate(), getMyKingCoordinates()))
+    			return true;
+    	}
+    	return false;
+    }
+    public boolean isOpponentChecked() {
+    	List<Cell> Cells = getMyCells();
+    	for (Cell cell : Cells) {
+    		if(cell.getFigure().isMoveValid(this, cell.getCoordinate(), getOpponentKingCoordinates()))
+    			return true;
+    	}
+    	return false;
+    }
+    
+    //Gettery koordynatów królów:
+    public int getMyKingCoordinates() {
+        for (Cell cell : getCells()) {
+            Figure figure = cell.getFigure();
+            if (figure instanceof King && figure.isMine()) {
+            	return cell.getCoordinate();
+            }
+        }
+        return -1;
+    }
+    
+    public int getOpponentKingCoordinates() {
+        for (Cell cell : getCells()) {
+            Figure figure = cell.getFigure();
+            if (figure instanceof King && !figure.isMine()) {
+            	return cell.getCoordinate();
+            }
+        }
+        return -1;
+    }
+    
+    public List<Cell> getMyCells() {
+        List<Cell> myCells = new ArrayList<>();
+
+        for (Cell cell : getCells()) {
+            Figure figure = cell.getFigure();
+            if (figure != null && figure.isMine()) {
+                myCells.add(cell);
+            }
+        }
+        return myCells;
+    }
+    
+    public List<Cell> getOpponentCells() {
+        List<Cell> OpponentCells = new ArrayList<>();
+
+        for (Cell cell : getCells()) {
+            Figure figure = cell.getFigure();
+            if (figure != null && !figure.isMine()) {
+                OpponentCells.add(cell);
+            }
+        }
+        return OpponentCells;
+    }
 }
 

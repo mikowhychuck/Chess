@@ -29,12 +29,12 @@ public class ChessGame implements ChessInterface {
     		board.move(indexFrom, indexTo);
     	}
         
-    	if(amIChecked()) {
+    	if(board.amIChecked()) {
     		System.out.println("Poddaję się");
     		return null;
     	}
     	
-    	List<Cell> myCells = getMyCells();
+    	List<Cell> myCells = board.getMyCells();
         Cell selectedCell = getRandomCell(myCells);
         int selectedCellCoordinate = selectedCell.getCoordinate();
         int targetIndex = generateRandomTarget();
@@ -54,29 +54,7 @@ public class ChessGame implements ChessInterface {
         board.print();
     }
 
-    public List<Cell> getMyCells() {
-        List<Cell> myCells = new ArrayList<>();
-
-        for (Cell cell : board.getCells()) {
-            Figure figure = cell.getFigure();
-            if (figure != null && figure.isMine()) {
-                myCells.add(cell);
-            }
-        }
-        return myCells;
-    }
     
-    public List<Cell> getOpponentCells() {
-        List<Cell> OpponentCells = new ArrayList<>();
-
-        for (Cell cell : this.board.getCells()) {
-            Figure figure = cell.getFigure();
-            if (figure != null && !figure.isMine()) {
-                OpponentCells.add(cell);
-            }
-        }
-        return OpponentCells;
-    }
 
     private Cell getRandomCell(List<Cell> cells) {
         Random random = new Random();
@@ -116,49 +94,14 @@ public class ChessGame implements ChessInterface {
         return (row-1)*8 + column;
     	
     }
-    //Gettery koordynatów królów:
-    public int getMyKingCoordinates() {
-        for (Cell cell : this.board.getCells()) {
-            Figure figure = cell.getFigure();
-            if (figure instanceof King && figure.isMine()) {
-            	return cell.getCoordinate();
-            }
-        }
-        return -1;
-    }
-    
-    public int getOpponentKingCoordinates() {
-        for (Cell cell : this.board.getCells()) {
-            Figure figure = cell.getFigure();
-            if (figure instanceof King && !figure.isMine()) {
-            	return cell.getCoordinate();
-            }
-        }
-        return -1;
-    }
-    //Sprawdzanie szacha:
-    public boolean amIChecked() {
-    	List<Cell> Cells = getOpponentCells();
-    	for (Cell cell : Cells) {
-    		if(cell.getFigure().isMoveValid(board, cell.getCoordinate(), getMyKingCoordinates()))
-    			return true;
-    	}
-    	return false;
-    }
-    public boolean isOpponentChecked() {
-    	List<Cell> Cells = getMyCells();
-    	for (Cell cell : Cells) {
-    		if(cell.getFigure().isMoveValid(board, cell.getCoordinate(), getOpponentKingCoordinates()))
-    			return true;
-    	}
-    	return false;
-    }
+
+
     public boolean isMate() {
-    	int myKingCoordinate = getMyKingCoordinates();
+    	int myKingCoordinate = board.getMyKingCoordinates();
     	for(Cell cell: board.getCells()) {
     		if(board.getCell(myKingCoordinate).getFigure().isMoveValid(board, myKingCoordinate, cell.getCoordinate())) {
     			board.getCell(myKingCoordinate).getFigure().move(board, myKingCoordinate, cell.getCoordinate());
-    			if(amIChecked()) {
+    			if(board.amIChecked()) {
     				cell.getFigure().move(board, cell.getCoordinate(), myKingCoordinate);
     				break;
     			}else
