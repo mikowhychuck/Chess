@@ -28,9 +28,9 @@ public class Pawn extends Figure {
     		if(targetCell.getFigure().isMine() == false) {
     			return true;
     		}
-    		if (targetCell.getFigure() != null && targetCell.getFigure() instanceof King) {
-            	return false;
-            }
+//    		if (targetCell.getFigure() != null && targetCell.getFigure() instanceof King) {
+//            	return false;
+//            }
     	}
     	return false;
     }

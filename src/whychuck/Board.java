@@ -117,6 +117,10 @@ class Board {
         return -1;
     }
     
+    public Figure getMyKing() {
+    	return getCell(getMyKingCoordinates()).getFigure();
+    }
+    
     public int getOpponentKingCoordinates() {
         for (Cell cell : getCells()) {
             Figure figure = cell.getFigure();
@@ -149,6 +153,44 @@ class Board {
             }
         }
         return OpponentCells;
+    }
+    
+    public Movement killAttackingFigure() {
+    	Board tempBoard = this;
+    	Movement movement = null;
+    	int i = 0;
+    	for(Cell OpponentCell : getOpponentCells()) {
+    		if(OpponentCell.getFigure().isMoveValid(tempBoard, OpponentCell.getCoordinate(), getMyKingCoordinates())) {
+    			for(Cell myCell : getMyCells()) {
+    				if(myCell.getFigure().isMoveValid(tempBoard, myCell.getCoordinate(), OpponentCell.getCoordinate()) 
+    						&& !(OpponentCell.getFigure() instanceof King)) {
+    					if(tempBoard.amIChecked())
+    						movement = new Movement(myCell.getCoordinate(), OpponentCell.getCoordinate());
+    				}
+    			}
+    		}
+    	}
+    	if(i > 1 || movement == null)
+    		return null;
+    	else
+    		return movement;
+    }
+    public Movement moveKingToAvoidMate() {
+    	Board tempBoard = this;
+    	Movement movement = null;
+    	int kingCoordinates = this.getMyKingCoordinates();
+    	for(Cell targetCell : getCells()) {
+    		if(getMyKing().isMoveValid(this, tempBoard.getMyKingCoordinates(), targetCell.getCoordinate())){
+    			getMyKing().move(this, tempBoard.getMyKingCoordinates(), targetCell.getCoordinate());
+    			if(!this.amIChecked()) {
+    				movement = new Movement(kingCoordinates, targetCell.getCoordinate());
+    				return movement;
+    			}else {
+    				getMyKing().move(this, tempBoard.getMyKingCoordinates(), kingCoordinates);
+    			}
+    		}
+    	}
+    	return movement;
     }
 }
 

@@ -1,5 +1,6 @@
 package whychuck;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -8,7 +9,7 @@ import net.hypki.wmi.oop.chess.ChessInterface;
 
 
 public class ChessGame implements ChessInterface {
-    private Board board;
+    public Board board;
     
     public ChessGame() {
     }
@@ -30,8 +31,26 @@ public class ChessGame implements ChessInterface {
     	}
         
     	if(board.amIChecked()) {
-    		System.out.println("Poddaję się");
-    		return null;
+    		System.out.println("Jest szach");
+    		Movement movement = board.killAttackingFigure();
+    		if(movement != null) {
+    			board.getCell(movement.indexFrom).getFigure().move(board, movement.indexFrom, movement.indexTo);
+    			System.out.println("Udało się zbić atakującą figurę");
+    			return formatMoveToClassicNotation(movement.indexFrom, movement.indexTo);
+    		}else {
+    			System.out.println("Nie udało się zbić atakującej figury");
+//    			movement = board.moveKingToAvoidMate();
+//        		if(movement != null) {
+//        			board.getMyKing().move(board, movement.indexFrom, movement.indexTo);
+//        			System.out.println("Król unika ataku ruszając się");
+//        			return formatMoveToClassicNotation(movement.indexFrom, movement.indexTo);
+//        		}else {
+//        			System.out.println("Nie udało się uciec przed atakiem");
+//        			return null;
+//        		}
+    			return null;
+    		}
+    		
     	}
     	
     	List<Cell> myCells = board.getMyCells();
@@ -41,6 +60,10 @@ public class ChessGame implements ChessInterface {
 
         Figure figure = selectedCell.getFigure();
         boolean moveSuccessful = figure.move(board, selectedCellCoordinate, targetIndex);
+        if(board.amIChecked() && moveSuccessful) {
+        	figure.move(board, targetIndex, selectedCellCoordinate);
+        	return nextMove(opponentMove);
+        }
         
         if (moveSuccessful) {
         	return formatMoveToClassicNotation(selectedCellCoordinate, targetIndex); 
@@ -93,22 +116,6 @@ public class ChessGame implements ChessInterface {
     	int row = Character.getNumericValue(position.charAt(1));
         return (row-1)*8 + column;
     	
-    }
-
-
-    public boolean isMate() {
-    	int myKingCoordinate = board.getMyKingCoordinates();
-    	for(Cell cell: board.getCells()) {
-    		if(board.getCell(myKingCoordinate).getFigure().isMoveValid(board, myKingCoordinate, cell.getCoordinate())) {
-    			board.getCell(myKingCoordinate).getFigure().move(board, myKingCoordinate, cell.getCoordinate());
-    			if(board.amIChecked()) {
-    				cell.getFigure().move(board, cell.getCoordinate(), myKingCoordinate);
-    				break;
-    			}else
-    				return false;
-    		}
-    	}
-    	return true;
     }
 }
 

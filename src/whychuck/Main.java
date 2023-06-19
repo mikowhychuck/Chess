@@ -9,11 +9,13 @@ class Main {
 		ChessGame white = new ChessGame();
 		ChessGame black = new ChessGame();
 		String lastMove = null;
-		int i = 10;
+		int i = 0;
 		while(true) {
+			System.out.println(i);
 			lastMove = white.nextMove(lastMove);
 			if(lastMove == null) {
 				System.out.println("Czarni wygrali");
+				black.printBoard();
 				break;
 			}
 			System.out.println("ruch białych: " + lastMove);
@@ -22,14 +24,13 @@ class Main {
 			lastMove = black.nextMove(lastMove);
 			if(lastMove == null) {
 				System.out.println("Biali wygrali");
+				white.printBoard();
 				break;
 			}	
 			System.out.println("ruch czarnych: " + lastMove);
 			black.printBoard();
 			System.out.println();
-			i--;
-			if(i==0)
-				break;
+			i++;
 		}
 	}
 }

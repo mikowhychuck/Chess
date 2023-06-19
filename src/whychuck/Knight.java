@@ -25,9 +25,9 @@ public class Knight extends Figure {
             if (targetFigure != null && targetFigure.isMine() == isMine()) {
                 return false;
             }
-            if (targetFigure != null && targetFigure instanceof King) {
-            	return false;
-            }
+//            if (targetFigure != null && targetFigure instanceof King) {
+//            	return false;
+//            }
             return true;
         }else
         	return false;
