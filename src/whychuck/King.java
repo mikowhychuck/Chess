@@ -29,8 +29,9 @@ class King extends Figure {
 //            	return false;
 //            }
             return true;
-        }else
+        } else {
         	return false;
+        }
         
 	}
 	

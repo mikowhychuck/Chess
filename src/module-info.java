@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author adammikolajczak
- *
- */
-module Chess {
-}

@@ -79,7 +79,13 @@ class Board {
 		this.cells = cells;
 	}
 	
-	//jesli ruch nie jest mój, to nie sprawdzam czy jest prawidłowy
+	
+	/**
+	 * Jesli ruch nie jest mój, to nie sprawdzam czy jest prawidłowy
+	 * @param currentIndex - co to jest
+	 * 
+	 * @param targetIndex
+	 */
 	public void move(int currentIndex, int targetIndex) {
 		if(this.getCell(currentIndex).getFigure() != null) {
 			Figure figure = this.getCell(currentIndex).getFigure();
@@ -90,8 +96,8 @@ class Board {
 	
     //Sprawdzanie szacha:
     public boolean amIChecked() {
-    	List<Cell> Cells = getOpponentCells();
-    	for (Cell cell : Cells) {
+    	List<Cell> cells = getOpponentCells();
+    	for (Cell cell : cells) {
     		if(cell.getFigure().isMoveValid(this, cell.getCoordinate(), getMyKingCoordinates()))
     			return true;
     	}

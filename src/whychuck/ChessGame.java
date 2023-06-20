@@ -103,6 +103,7 @@ public class ChessGame implements ChessInterface {
     	Movement movement = new Movement(from, to);
     	return movement;
     }
+    
     //konwersja indeksu pola do klasycznej notacji i odwrotnie
     public String convertIndexToPosition(int index) {
         int row = index / 8;
@@ -111,6 +112,7 @@ public class ChessGame implements ChessInterface {
         int rank = row+1;
         return String.valueOf(file) + rank;
     }
+    
     public int convertPositionToIndex(String position) {
     	int column = position.charAt(0) - 'a';
     	int row = Character.getNumericValue(position.charAt(1));
